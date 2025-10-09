@@ -40,4 +40,4 @@ const Subscription = sequelize.define('Subscription', {
     timestamps: true,
 });
 
-export default Susbcription;
+export default Subscription;
