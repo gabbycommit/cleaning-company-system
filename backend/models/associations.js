@@ -23,25 +23,29 @@ Order.belongsTo(House, { foreignKey: 'house_id' });
 Service.belongsToMany(Order, { 
     through: OrderService,
     foreignKey: 'service_id',
-    otherKey: 'order_id', 
-    onDelete: 'CASCADE' 
-});
-Order.belongsToMany(Service, { 
+    otherKey: 'order_id',
+    onDelete: 'CASCADE'
+  });
+  
+  Order.belongsToMany(Service, { 
     through: OrderService,
-    foreignKey: 'order_id' ,
+    foreignKey: 'order_id',
     otherKey: 'service_id',
+    onDelete: 'CASCADE'
+  });
+
+//N employee to N order
+Employee.belongsToMany(Order, { 
+    through: 'EmployeeOrders',
+    foreignKey: 'employee_id',
+    otherKey: 'order_id',
     onDelete: 'CASCADE'
 });
 
-//N employee to N order
-Employee.hasMany(Order, { 
-    through: 'EmployeeOrders',
-    foreignKey: 'employee_id', 
-    onDelete: 'CASCADE' 
-});
 Order.belongsToMany(Employee, { 
     through: 'EmployeeOrders',
-    foreignKey: 'employee_id',
+    foreignKey: 'order_id',
+    otherKey: 'employee_id',
     onDelete: 'CASCADE'
 });
 
@@ -58,6 +62,7 @@ export{
     Employee,
     House,
     Order,
+    OrderService,
     Payment,
     Service,
     Subscription

@@ -1,28 +1,13 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import db from "./config/db.js";
-import bodyParser from "body-parser";
+import sequelize from "./config/db.js";
+import './models/associations.js';
+import './models/User.js';
 
-import authRoutes from "./routes/authRoutes.js";
-import customerRoutes from "./routes/customerRoutes.js";
-import employeeRoutes from "./routes/employeeRoutes.js";
-import orderRoutes from "./routes/orderRoutes.js";
-import adminRoutes from "./routes/adminRoutes.js";
-
-dotenv.config();
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-app.use(bodyParser.json());
-
-// Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/customers", customerRoutes);
-app.use("/api/employees", employeeRoutes);
-app.use("/api/orders", orderRoutes);
-app.use("/api/admin", adminRoutes);
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+sequelize.sync({ alter: true })
+    .then(() => {
+        console.log('Tables create or updated succefully');
+        process.exit(0);
+    })
+    .catch(err => {
+        console.log('Error creating table.', err);
+        process.exit(1);
+    });

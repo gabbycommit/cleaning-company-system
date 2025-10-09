@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
-import sequeliz from "../config/db";
+import sequelize from '../../config/db.js';
 
-const OrderService = sequeliz.define('OrderService', {
+const OrderService = sequelize.define('OrderService', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
