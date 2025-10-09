@@ -24,6 +24,7 @@ const Service = sequelize.define('Service', {
         allowNull: false,
     }
 }, {
+    tableName: 'services',
     timestamps: true,
 });
 

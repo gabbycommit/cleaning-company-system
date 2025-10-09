@@ -36,6 +36,7 @@ const Subcription = sequelize.define('Subcription', {
         allowNull: false,
     }
 }, {
+    tableName: 'subcriptions',
     timestamps: true,
 });
 
