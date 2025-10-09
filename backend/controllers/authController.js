@@ -4,11 +4,11 @@ import db from "../config/db.js";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// 注册
+// 注册（仅限客户）
 export const register = (req, res) => {
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body; // 不再传 role
 
-    // 先检查 email 是否已存在
+    // 检查 email 是否已存在
     const checkQuery = "SELECT * FROM users WHERE email = ?";
     db.query(checkQuery, [email], (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
@@ -17,11 +17,12 @@ export const register = (req, res) => {
         // 加密密码
         const hashedPassword = bcrypt.hashSync(password, 10);
 
-        const insertQuery = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
-        db.query(insertQuery, [name, email, hashedPassword, role || "customer"], (err, results) => {
+        // role 固定为 customer
+        const insertQuery = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'customer')";
+        db.query(insertQuery, [name, email, hashedPassword], (err, results) => {
             if (err) return res.status(500).json({ error: err.message });
 
-            const token = jwt.sign({ id: results.insertId, role: role || "customer" }, JWT_SECRET, { expiresIn: "7d" });
+            const token = jwt.sign({ id: results.insertId, role: 'customer' }, JWT_SECRET, { expiresIn: "7d" });
             res.json({ message: "注册成功", token });
         });
     });
