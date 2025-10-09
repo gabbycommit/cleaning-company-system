@@ -12,7 +12,7 @@ const Payment = sequelize.define('Payment', {
         allowNull: false,
     },
     payment_method: {
-        type: DataTypes.ENUM('caah', 'online_banking', 'e-wallet'),
+        type: DataTypes.ENUM('cash', 'online_banking', 'e-wallet'),
         allowNull: false,
     },
     status: {

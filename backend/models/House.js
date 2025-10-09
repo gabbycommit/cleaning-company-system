@@ -36,7 +36,7 @@ const House = sequelize.define('House', {
         allowNull: false,
     },
     poscode: {
-        type: DataTypes.state(20),
+        type: DataTypes.STRING(20),
         allowNull: false,
     },
     customer_id: {

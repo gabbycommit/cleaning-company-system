@@ -63,6 +63,10 @@ const Order = sequelize.define('Order', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    house_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
     employee_id: {
         type: DataTypes.INTEGER,
         allowNull: false,

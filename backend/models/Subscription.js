@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db";
 
-const Subcription = sequelize.define('Subcription', {
+const Subscription = sequelize.define('Subscription', {
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -36,8 +36,8 @@ const Subcription = sequelize.define('Subcription', {
         allowNull: false,
     }
 }, {
-    tableName: 'subcriptions',
+    tableName: 'subscriptions',
     timestamps: true,
 });
 
-export default Subcription;
+export default Susbcription;

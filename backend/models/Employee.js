@@ -60,7 +60,7 @@ const Employee = sequelize.define('Employee', {
         allowNull: false,
     }
 }, {
-    tableName: 'customers',
+    tableName: 'employees',
     timestapms: true,
 });
 
