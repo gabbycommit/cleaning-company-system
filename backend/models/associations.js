@@ -24,14 +24,12 @@ Service.belongsToMany(Order, {
   through: OrderService,
   foreignKey: "service_id",
   otherKey: "order_id",
-  onDelete: "CASCADE",
 });
 
 Order.belongsToMany(Service, {
   through: OrderService,
   foreignKey: "order_id",
   otherKey: "service_id",
-  onDelete: "CASCADE",
 });
 
 //N employee to N order
@@ -39,14 +37,12 @@ Employee.belongsToMany(Order, {
   through: "EmployeeOrders",
   foreignKey: "employee_id",
   otherKey: "order_id",
-  onDelete: "CASCADE",
 });
 
 Order.belongsToMany(Employee, {
   through: "EmployeeOrders",
   foreignKey: "order_id",
   otherKey: "employee_id",
-  onDelete: "CASCADE",
 });
 
 //1 order to 1 payment
