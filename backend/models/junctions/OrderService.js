@@ -1,36 +1,40 @@
 import { DataTypes } from "sequelize";
-import sequelize from '../../config/db.js';
+import sequelize from "../../config/db.js";
 
-const OrderService = sequelize.define('OrderService', {
+const OrderService = sequelize.define(
+  "OrderService",
+  {
     id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
     order_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     service_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     unit_price: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
     },
     quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 1,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
     },
     note: {
-        type: DataTypes.TEXT,
-        allowNull: true,
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
-}, {
-    tableName: 'order_services',
+  },
+  {
+    tableName: "order_services",
     timestamps: true,
-});
+  }
+);
 
 export default OrderService;

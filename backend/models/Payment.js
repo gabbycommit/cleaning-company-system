@@ -1,28 +1,32 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-const Payment = sequelize.define('Payment', {
+const Payment = sequelize.define(
+  "Payment",
+  {
     id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
     order_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     payment_method: {
-        type: DataTypes.ENUM('cash', 'online_banking', 'e-wallet'),
-        allowNull: false,
+      type: DataTypes.ENUM("cash", "online_banking", "e-wallet"),
+      allowNull: false,
     },
     status: {
-        type: DataTypes.ENUM('pending', 'confirmed'),
-        defaultValue: ('pending'),
-        allowNull:false,
+      type: DataTypes.ENUM("pending", "confirmed"),
+      defaultValue: "pending",
+      allowNull: false,
     },
-}, {
-    tableName: 'payments',
+  },
+  {
+    tableName: "payments",
     timestamps: true,
-});
+  }
+);
 
 export default Payment;

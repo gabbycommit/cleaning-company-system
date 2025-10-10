@@ -1,5 +1,8 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, where } from 'sequelize';
 import sequelize from "../config/db.js";
+import House from './House.js';
+import Order from './Order.js';
+import Payment from './Payment.js';
 
 
 const Customer = sequelize.define('Customer', {
@@ -22,7 +25,39 @@ const Customer = sequelize.define('Customer', {
     }
 }, {
     tableName: 'customers',
+    paranoid: true,
     timestamps: true,
+});
+
+Customer.addHook('afterDestroy', async(customer, options) => {
+    await House.update(
+        { deletedAt: new Date() },
+        { 
+            where: {customer_id: customer.id,}, 
+            transaction: options?.transaction, 
+        }
+    );
+
+    await Order.update(
+        { deletedAt: new Date() },
+        { 
+            where: {customer_id: customer.id,}, 
+            transaction: options?.transaction,
+        }
+    );
+
+    await Payment.update(
+        { deletedAt: new Date() },
+        { 
+            where: {
+                order_id: sequelize.literal(`(
+                SELECT id FROM orders WHERE customer_id = ${customer.id}
+            )`)
+            
+        }, 
+            transaction: options?.transaction, 
+        }
+    );
 });
 
 export default Customer;

@@ -1,31 +1,35 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-const Service = sequelize.define('Service', {
+const Service = sequelize.define(
+  "Service",
+  {
     id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
     service_name: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
+      type: DataTypes.STRING(50),
+      allowNull: false,
     },
     other_description: {
-        type: DataTypes.TEXT,
-        allowNull: true,
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
-    price :{
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull:false,
+    price: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
     },
     unit: {
-        type: DataTypes.ENUM('hour', 'session'),
-        allowNull: false,
-    }
-}, {
-    tableName: 'services',
+      type: DataTypes.ENUM("hour", "session"),
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "services",
     timestamps: true,
-});
+  }
+);
 
 export default Service;

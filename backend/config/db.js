@@ -1,5 +1,5 @@
-import { Sequelize} from 'sequelize';
-import dotenv from 'dotenv';
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -9,14 +9,15 @@ const sequelize = new Sequelize(
   process.env.DB_PASS,
   {
     host: process.env.DB_HOST,
-    dialect: 'mysql',
+    dialect: "mysql",
     logging: false,
   }
 );
 
 //测试数据连接
-sequelize.authenticate()
+sequelize
+  .authenticate()
   .then(() => console.log("Connected to MySQL Database via Sequelize"))
-  .catch(err => console.log("Database connection failed:", err));
+  .catch((err) => console.log("Database connection failed:", err));
 
 export default sequelize;
